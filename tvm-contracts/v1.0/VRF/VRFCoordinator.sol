@@ -153,6 +153,12 @@ contract VRFCoordinator is VRF, VRFRequestIDBase, Owned {
     validRequestLength(_data)
     permittedFunctionsForLINK(_data)
   {
+    bytes32 keyHash;
+    assembly {
+      keyHash := mload(add(_data,100))
+    }
+    require(serviceAgreements[keyHash].vRFOracle != address(0), "please use a registered keyHash");
+
     assembly { // solhint-disable-line no-inline-assembly
       mstore(add(_data, 36), _sender) // ensure correct sender is passed
       mstore(add(_data, 68), _fee) // ensure correct amount is passed

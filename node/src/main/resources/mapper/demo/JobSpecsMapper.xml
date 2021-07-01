@@ -39,12 +39,12 @@
 	</select>
 
 	<select id="getAll" resultType="com.tron.web.entity.JobSpec" resultMap="JobSpecResultMap">
-		select id, `start_at`, `end_at`, `min_payment`, created_at, updated_at, deleted_at
+		select id, `start_at`, `end_at`, `min_payment`, `params`, created_at, updated_at, deleted_at
 		from job_specs
 	</select>
 
 	<select id="getList" resultType="com.tron.web.entity.JobSpec" resultMap="JobSpecResultMap">
-		select id, `start_at`, `end_at`, `min_payment`, created_at, updated_at, deleted_at
+		select id, `start_at`, `end_at`, `min_payment`, `params`, created_at, updated_at, deleted_at
 		from job_specs
 		where `deleted_at` is null
 		order by `created_at` desc
