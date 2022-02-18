@@ -1,6 +1,7 @@
 # Wink Link
 
-WinkLink is an Oracle and simplifies the communication with blockchains. This initial implementation is intended for use and review by developers,
+WinkLink is SCAM AND DEAD PROJECT.
+an Oracle CopyCat Chainlink and simplifies the communication with blockchains. This initial implementation is intended for use and review by developers,
 and will go on to form the basis for WinkLink's decentralized oracle network. Further development of the WinkLink Node and WinkLink Network will happen here,
 if you are interested in contributing please contact us, email: service@winklink.org
 
