@@ -22,3 +22,12 @@ ALTER TABLE `txes` MODIFY `confirmed` tinyint DEFAULT 0
 COMMENT '0:init 101:unstarted 102:inprogress 103:fatalerror 104:outofenergy 105:confirmed';
 ALTER TABLE `txes` ADD INDEX `idx_confirmed` (`confirmed`);
 ALTER TABLE `txes` ADD INDEX `idx_sent_at` (`sent_at`);
+
+CREATE TABLE `demo`  (
+  `id` INT UNSIGNED AUTO_INCREMENT,
+  `key` varchar(255) NOT NULL ,
+  `value` varchar(255) NOT NULL ,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB default charset=utf8;

@@ -19,6 +19,7 @@ management:
         include: '*'
 
 logging:
+  config: classpath:logback-spring.xml
   level:
     com.tron: info
     com.tron.web.mapper: debug
