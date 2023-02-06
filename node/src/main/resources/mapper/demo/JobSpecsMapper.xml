@@ -65,7 +65,7 @@
 					right outer join (select jr.id, jr.job_spec_id from job_runs jr where jr.updated_at = (select max(updated_at) from job_runs ijr where ijr.job_spec_id = jr.job_spec_id)) xjr on xjr.id = xtr.job_run_id) xjr on xjr.job_spec_id = i.job_spec_id
 		where js.deleted_at is null
 		order by js.updated_at desc
-		limit #{offset} ,#{limit};
+		limit #{offset} ,#{limit}
 	</select>
 
 	<select id="getList" resultType="com.tron.web.entity.JobSpec" resultMap="JobSpecResultMap">
