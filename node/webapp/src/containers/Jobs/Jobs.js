@@ -165,8 +165,8 @@ class Jobs extends Component {
       ID: data.jobSpecsId,
       Initiator: data.type,
       LastRun: {
-        date: (lastRun !== 0) ? new Date(lastRun).toLocaleString(LOCALE, {timeZone: TIMEZONE}) : "-",
-        epoch: (lastRun !== 0) ? moment(lastRun).unix() : moment(data.updatedAt).unix,
+        date: (lastRun !== 0 || lastRun) ? new Date(lastRun).toLocaleString(LOCALE, {timeZone: TIMEZONE}) : new Date(data.updatedAt).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
+        epoch: (lastRun !== 0 || lastRun) ? moment(lastRun).unix() : moment(data.updatedAt).unix,
       },
       Updated: {
         date: new Date(data.updatedAt).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
