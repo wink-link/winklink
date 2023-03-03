@@ -152,6 +152,13 @@ class Jobs extends Component {
 
   createJob = (data, api) => {
     const params = JSON.parse(data.params);
+    let result, updated;
+    if (data.result) {
+       let r = data.result.split(",");
+       result = r[0] || "-";
+       updated = r[1] || 0;
+    }
+
     return {
       key: data.address + data.jobSpecsId + api.text,
       Contract: data.address,
@@ -162,15 +169,15 @@ class Jobs extends Component {
         epoch: moment(data.createdAt).unix(),
       },
       Updated: {
-        date: new Date(data.updatedAt).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
-        epoch: moment(data.updatedAt).unix(),
+        date: (updated !== 0) ? new Date(updated).toLocaleString(LOCALE, {timeZone: TIMEZONE}) : "-",
+        epoch: moment(updated).unix(),
       },
       Node: api.text,
       DataSource: {
         task: JSON.parse(data.params).tasks.map(task => task.type).join(" / "),
         ...(this.generateTagColor(params.tasks[0]))
       },
-      LastRunResult: { value: data.result || '-', url: `${api.value}/job/result/${data.jobSpecsId}` },
+      LastRunResult: { value: result, url: `${api.value}/job/result/${data.jobSpecsId}` },
       Code: JSON.stringify(params, null, 2),
       PublicKey: (params.initiators[0].type === RANDOMNESS_LOG) ?
           params.tasks[0].params.publicKey : null,

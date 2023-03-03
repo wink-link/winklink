@@ -59,14 +59,13 @@
 	<select id="getAllActive" resultType="com.tron.web.entity.DetailActiveJob" resultMap="DetailJobResultMap">
 		SELECT
 			optimized.*
-			,(SELECT tr.result FROM task_runs tr WHERE tr.job_run_id = (SELECT jr.id FROM job_runs jr WHERE optimized.job_specs_id = jr.job_spec_id ORDER BY jr.updated_at DESC LIMIT 1) ORDER BY tr.task_spec_id DESC LIMIT 1, 1) result
-		FROM
-			(SELECT i.id, i.address, i.job_spec_id job_specs_id, i.type, js.created_at, js.updated_at, js.deleted_at, js.params
-			 FROM (SELECT max(initiators.id) AS id, initiators.address, any_value(initiators.job_spec_id) FROM initiators WHERE initiators.type = #{type} AND initiators.deleted_at IS NULL GROUP BY initiators.address ORDER BY NULL) xi
-							INNER JOIN initiators i USING (address, id)
-							INNER JOIN job_specs js ON i.job_spec_id = js.id
-			 WHERE js.deleted_at IS NULL
-			 ORDER BY js.updated_at DESC LIMIT #{offset}, #{limit}) AS optimized
+				 ,(SELECT CONCAT(tr.result, ',' , tr.updated_at) as result FROM task_runs tr WHERE tr.job_run_id = (SELECT jr.id FROM job_runs jr WHERE optimized.job_specs_id = jr.job_spec_id ORDER BY jr.updated_at DESC LIMIT 1) ORDER BY tr.task_spec_id DESC LIMIT 1, 1) result
+		FROM (SELECT i.id, i.address, i.job_spec_id job_specs_id, i.type, js.created_at, js.updated_at, js.deleted_at, js.params
+					FROM (SELECT max(initiators.id) AS id, initiators.address, any_value(initiators.job_spec_id) FROM initiators WHERE initiators.type = #{type} AND initiators.deleted_at IS NULL GROUP BY initiators.address ORDER BY NULL) xi
+								 INNER JOIN initiators i USING (address, id)
+								 INNER JOIN job_specs js ON i.job_spec_id = js.id
+					WHERE js.deleted_at IS NULL
+					ORDER BY js.updated_at DESC LIMIT #{offset}, #{limit}) as optimized;
 	</select>
 
 	<select id="getList" resultType="com.tron.web.entity.JobSpec" resultMap="JobSpecResultMap">
