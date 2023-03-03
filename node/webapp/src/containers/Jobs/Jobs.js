@@ -152,11 +152,11 @@ class Jobs extends Component {
 
   createJob = (data, api) => {
     const params = JSON.parse(data.params);
-    let result, updated;
+    let result, lastRun;
     if (data.result) {
        let r = data.result.split(",");
        result = r[0] || "-";
-       updated = r[1] || 0;
+      lastRun = r[1] || 0;
     }
 
     return {
@@ -164,13 +164,13 @@ class Jobs extends Component {
       Contract: data.address,
       ID: data.jobSpecsId,
       Initiator: data.type,
-      Created: {
-        date: new Date(data.createdAt).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
-        epoch: moment(data.createdAt).unix(),
+      LastRun: {
+        date: (lastRun !== 0) ? new Date(lastRun).toLocaleString(LOCALE, {timeZone: TIMEZONE}) : "-",
+        epoch: moment(lastRun).unix(),
       },
       Updated: {
-        date: (updated !== 0) ? new Date(updated).toLocaleString(LOCALE, {timeZone: TIMEZONE}) : "-",
-        epoch: moment(updated).unix(),
+        date: new Date(data.updatedAt).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
+        epoch: moment(data.updatedAt).unix(),
       },
       Node: api.text,
       DataSource: {
