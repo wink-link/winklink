@@ -25,7 +25,7 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
-            devshell.overlay
+            devshell.overlays.default
             (final: prev: {
               npmlock2nix = import npmlock2nix { pkgs = prev; };
             })
@@ -46,10 +46,6 @@
         devShell = pkgs.devshell.mkShell {
           env = [
             {
-              name = "JAVA_HOME";
-              value = "${pkgs.openjdk8}";
-            }
-            {
               name = "NIX_LD_LIBRARY_PATH";
               value = pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc ];
             }
@@ -62,21 +58,21 @@
           commands = [
             {
               category = "Programming language support";
-              package = pkgs.openjdk8;
+              package = pkgs.openjdk17;
               help = ''
                 1. use gradle assemble to install dependency first
-                              2. use gradle build -x test for dev build 
-                              3. go to node/build/lib to find jars 
+                2. use gradle build -x test for dev build 
+                3. go to node/build/lib to find jars 
               '';
             }
             {
               category = "Java package manager";
-              package = pkgs.gradle.override { java = pkgs.openjdk8; };
+              package = pkgs.gradle;
               name = "gradle";
               help = ''
                 1. use gradle assemble to install dependency first
-                              2. use gradle build -x test for dev build 
-                              3. go to node/build/lib to find jars 
+                2. use gradle build -x test for dev build 
+                3. go to node/build/lib to find jars 
               '';
             }
             {

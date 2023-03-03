@@ -12,7 +12,7 @@ import java.util.Map;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.spongycastle.util.encoders.Hex;
+import org.bouncycastle.util.encoders.Hex;
 import org.tron.common.crypto.ECKey;
 import org.tron.common.utils.ByteArray;
 import org.tron.common.utils.JsonUtil;

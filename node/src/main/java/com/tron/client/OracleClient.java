@@ -34,7 +34,7 @@ import com.tron.web.service.JobRunsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.DecoderException;
 import org.aspectj.weaver.ast.Or;
-import org.spongycastle.util.encoders.Hex;
+import org.bouncycastle.util.encoders.Hex;
 import org.springframework.stereotype.Component;
 import org.tron.common.crypto.ECKey;
 import org.tron.common.utils.ByteArray;

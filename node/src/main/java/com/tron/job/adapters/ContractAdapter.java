@@ -19,7 +19,7 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.spongycastle.util.encoders.Hex;
+import org.bouncycastle.util.encoders.Hex;
 @Slf4j
 public class ContractAdapter {
 

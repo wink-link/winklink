@@ -19,7 +19,7 @@ import java.util.*;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.spongycastle.util.encoders.Hex;
+import org.bouncycastle.util.encoders.Hex;
 import org.springframework.web.bind.annotation.*;
 import org.tron.common.crypto.ECKey;
 import org.tron.common.utils.ByteArray;

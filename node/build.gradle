@@ -1,17 +1,19 @@
 buildscript {
 	ext {
-		springBootVersion = '2.3.3.RELEASE'
+		springBootVersion = '3.0.1'
 	}
 	repositories {
+                mavenLocal()
 		mavenCentral()
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:_")
 	}
 }
 
 plugins {
 	id 'java'
+
 }
 
 apply plugin: 'java'
@@ -20,11 +22,9 @@ apply plugin: 'org.springframework.boot'
 group 'tron.oracle'
 version 'v1.0'
 
-sourceCompatibility = 1.8
-
 repositories {
-	mavenCentral()
 	mavenLocal()
+	mavenCentral()
 	maven { url "https://repo1.maven.org/maven2" }
 	maven {
 		url "https://plugins.gradle.org/m2/"
@@ -42,55 +42,49 @@ dependencies {
         
 	implementation project(':node:webapp')
         
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
-	runtimeOnly 'mysql:mysql-connector-java'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+	implementation 'org.springframework.boot:spring-boot-starter-web:_'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:_'
+	runtimeOnly 'mysql:mysql-connector-java:_'
+	testImplementation(Spring.boot.test) {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+                
+	annotationProcessor 'org.projectlombok:lombok:_'
+	compileOnly 'org.projectlombok:lombok:_'
+	testAnnotationProcessor 'org.projectlombok:lombok:_'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:_'
+	testCompileOnly 'org.projectlombok:lombok:_'
+	implementation 'javax.validation:validation-api:_'
+	implementation 'org.apache.httpcomponents:httpcore:_'
+	implementation 'ch.qos.logback:logback-classic:_'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:_'
+	implementation ('org.flywaydb:flyway-core:_') {
+		exclude group: 'com.fasterxml.jackson.dataformat', module: 'jackson-dataformat-toml'
+       }
+	implementation 'org.yaml:snakeyaml:_'
+	implementation 'com.google.guava:guava:_'
+	implementation 'org.apache.httpcomponents:httpclient:_'
+	implementation 'org.apache.commons:commons-lang3:_'
+	implementation 'com.madgag.spongycastle:core:_'
+	implementation 'com.madgag.spongycastle:prov:_'
         
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.3.3.RELEASE'
-        
-	annotationProcessor 'org.projectlombok:lombok:1.18.2'
-	compileOnly 'org.projectlombok:lombok:1.18.2'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
-	testCompileOnly 'org.projectlombok:lombok:1.18.2'
-
-	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
-	implementation group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.13'
-	implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-	implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.1.3'
-	implementation group: 'org.flywaydb', name: 'flyway-core', version: '6.3.3'
-	implementation group: 'org.yaml', name: 'snakeyaml', version: '1.26'
-	implementation group: 'com.google.guava', name: 'guava', version: '29.0-jre'
-	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.12'
-	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-	implementation group: 'com.madgag.spongycastle', name: 'core', version: '1.58.0.0'
-	implementation group: 'com.madgag.spongycastle', name: 'prov', version: '1.58.0.0'
-
-	implementation('com.github.tronprotocol:java-tron:release_v4.7.0-SNAPSHOT'){
-		exclude group: 'org.springframework', module: 'spring-tx'
-		exclude group: 'org.slf4j', module: '*'
-		exclude group: 'ch.qos.logback', module: '*'
+	implementation('com.github.tronprotocol:java-tron:_') {
+		exclude group: 'com.alibaba', module: 'fastjson'
+                exclude group: 'com.github.tronprotocol', module: 'zksnark-java-sdk'
 	}
-	implementation 'com.fasterxml.jackson:jackson-bom:2.13.4'
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
-	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
+	implementation 'com.alibaba:fastjson:_'
+	testImplementation Testing.junit4
+	implementation 'com.google.code.gson:gson:_'
+	implementation 'org.slf4j:slf4j-api:_'
 
-	implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.83'
+	implementation 'com.google.protobuf:protobuf-java:_'
+	implementation 'io.grpc:grpc-netty-shaded:_'
 
-
-	testImplementation group: 'junit', name: 'junit', version: '4.13'
-	implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
-	implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-
-	implementation 'com.google.protobuf:protobuf-java:3.11.0'
-	implementation 'io.grpc:grpc-netty-shaded:1.31.0'
-	implementation 'io.grpc:grpc-netty:1.31.0'
-	implementation 'io.grpc:grpc-protobuf:1.31.0'
-	implementation 'io.grpc:grpc-stub:1.31.0'
-	implementation "org.bouncycastle:bcprov-jdk15on:1.68"
-	implementation 'com.google.guava:guava:28.0-jre'
+	implementation 'io.grpc:grpc-netty:_'
+	implementation 'io.grpc:grpc-protobuf:_'
+	implementation 'io.grpc:grpc-stub:_'
+	implementation "org.bouncycastle:bcprov-jdk15on:_"
+	implementation 'com.google.guava:guava:_'
 	implementation fileTree(dir:'src/libs', include: '*.jar')
 }
 

@@ -114,7 +114,7 @@ public class JobCache {
   public Long cacheGet(String jobId) {
     Queue<Long> valueList = jobResultCache.getIfPresent(jobId);
     if (valueList != null) {
-      double average = valueList.stream().mapToLong(v->v).average().orElse(0.0);
+        double average = valueList.stream().mapToLong(v->v).average().orElse(0.0);
       return Math.round(average);
     } else {
       return null;

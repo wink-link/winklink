@@ -11,7 +11,7 @@ import com.tron.keystore.KeyStore;
 import com.tron.web.entity.TronTx;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.spongycastle.util.encoders.Hex;
+import org.bouncycastle.util.encoders.Hex;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.tron.common.crypto.ECKey;
