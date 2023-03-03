@@ -166,7 +166,7 @@ class Jobs extends Component {
       Initiator: data.type,
       LastRun: {
         date: (lastRun !== 0) ? new Date(lastRun).toLocaleString(LOCALE, {timeZone: TIMEZONE}) : "-",
-        epoch: moment(lastRun).unix(),
+        epoch: (lastRun !== 0) ? moment(lastRun).unix() : 0,
       },
       Updated: {
         date: new Date(data.updatedAt).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
@@ -423,10 +423,10 @@ class Jobs extends Component {
       },
       {
         title: 'Last Run Time',
-        dataIndex: 'Created.date',
-        key: 'Created',
+        dataIndex: 'LastRun.date',
+        key: 'LastRun',
         ellipsis: true,
-        sorter: (a, b, sortOrder) => sorterUtil.DATE(a.Created.epoch, b.Created.epoch, sortOrder),
+        sorter: (a, b, sortOrder) => sorterUtil.DATE(a.LastRun.epoch, b.LastRun.epoch, sortOrder),
         defaultSortOrder: 'descend',
         sortDirection: ['descend', 'ascend'],
       },
