@@ -152,14 +152,19 @@ class Jobs extends Component {
 
   createJob = (data, api) => {
     const params = JSON.parse(data.params);
+    let result, lastRun;
+    let r = (data.result) ? data.result.split(",") : [];
+    result = r[0] || "-";
+    lastRun = r[1] || data.updatedAt;
+
     return {
       key: data.address + data.jobSpecsId + api.text,
       Contract: data.address,
       ID: data.jobSpecsId,
       Initiator: data.type,
-      Created: {
-        date: new Date(data.createdAt).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
-        epoch: moment(data.createdAt).unix(),
+      LastRun: {
+        date: new Date(lastRun).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
+        epoch: moment(lastRun).unix(),
       },
       Updated: {
         date: new Date(data.updatedAt).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
@@ -170,7 +175,7 @@ class Jobs extends Component {
         task: JSON.parse(data.params).tasks.map(task => task.type).join(" / "),
         ...(this.generateTagColor(params.tasks[0]))
       },
-      LastRunResult: { value: data.result || '-', url: `${api.value}/job/result/${data.jobSpecsId}` },
+      LastRunResult: { value: result, url: `${api.value}/job/result/${data.jobSpecsId}` },
       Code: JSON.stringify(params, null, 2),
       PublicKey: (params.initiators[0].type === RANDOMNESS_LOG) ?
           params.tasks[0].params.publicKey : null,
@@ -416,10 +421,10 @@ class Jobs extends Component {
       },
       {
         title: 'Last Run Time',
-        dataIndex: 'Created.date',
-        key: 'Created',
+        dataIndex: 'LastRun.date',
+        key: 'LastRun',
         ellipsis: true,
-        sorter: (a, b, sortOrder) => sorterUtil.DATE(a.Created.epoch, b.Created.epoch, sortOrder),
+        sorter: (a, b, sortOrder) => sorterUtil.DATE(a.LastRun.epoch, b.LastRun.epoch, sortOrder),
         defaultSortOrder: 'descend',
         sortDirection: ['descend', 'ascend'],
       },
