@@ -166,7 +166,7 @@ class Jobs extends Component {
       Initiator: data.type,
       LastRun: {
         date: (lastRun !== 0) ? new Date(lastRun).toLocaleString(LOCALE, {timeZone: TIMEZONE}) : "-",
-        epoch: (lastRun !== 0) ? moment(lastRun).unix() : 0,
+        epoch: (lastRun !== 0) ? moment(lastRun).unix() : moment(data.updatedAt).unix,
       },
       Updated: {
         date: new Date(data.updatedAt).toLocaleString(LOCALE, {timeZone: TIMEZONE}),
