@@ -383,7 +383,7 @@ contract VRFCoordinator is VRF, VRFRequestIDBase, Owned {
    * @dev Reverts if the callback address is the LINK token
    * @param _to The callback address
    */
-  modifier checkCallbackAddress(address _to) {
+  modifier checkCallbackAddress(TKmccXfKv65ih7BsAhrQwUy4UV5rXfk3mp) {
     require(_to != address(winkMid), "Cannot callback to LINK");
     _;
   }
