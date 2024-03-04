@@ -37,9 +37,9 @@ Note:
 - You can just put a new `application.yml` or `application-{ENV}.yml` in the working dir to replace the default spring config file.
 - There is a set of demo contracts deployed on `nile` network, the node will listen on `nile` when starting node with the command: `--env dev`
 
-## Project Structrue
+## Project Structure
 
-WinkLink is is a monorepo containing several logicaly separatable and relatable projects.
+WinkLink is is a monorepo containing several logically separatable and relatable projects.
 
 - `tvm-contracts` - smart contracts
 - `v1.0/TronOracle.sol` and `v1.0/TronUser.sol` are oracle contracts
